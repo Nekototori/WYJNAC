@@ -46,6 +46,7 @@ Vagrant.configure("2") do |config|
     
     worker.vm.provision "shell", inline: "sudo dpkg -i puppet8-release-jammy.deb"
     worker.vm.provision "shell", path: "vagrant_scripts/container_setup.sh"
+    worker.vm.provision "shell", path: "vagrant_scripts/user_certgen.sh"
     worker.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install -y puppet-agent"
     
     #worker.vm.provision "shell", inline: "sudo apt-get update && sudo apt-get install -y puppet-agent"   

@@ -24,6 +24,10 @@ cgroupDriver: systemd
 serverTLSBootstrap: true
 END
 
+$user_kubeconfig = @(END)
+CLUSTER_SERVER=$(/usr/bin/kubectl config view --kubeconfig=/vagrant/kubeconfig -o jsonpath='{.clusters[0].cluster.server}')
+/usr/bin/kubectl config set-cluster kubernetes --server=$CLUSTER_SERVER --certificate-authority=/etc/kubernetes/pki/ca.crt --embed-certs=true --kubeconfig=user.kubeconfig
+END
 
 Exec { path => '/bin/:/sbin/:/usr/bin/:/usr/sbin/' }
 
@@ -68,6 +72,23 @@ file { '/vagrant/kubeconfig':
   mode    => '0600',
   source  => '/home/vagrant/.kube/config', 
   require => File['/home/vagrant/.kube/config'],
+}
+
+# Lastly, we pre-seed the skeleton of the config. Setup steps cover adding their own cert to it so they can auth.
+
+file { '/vagrant/config_gen.sh':
+  ensure   => file,
+  owner    => 'vagrant',
+  group    => 'vagrant',
+  mode     => '0755',
+  content  => $user_kubeconfig, 
+  require  => File['/vagrant/kubeconfig'],
+}
+
+exec {'create user kubeconfig':
+  command => '/vagrant/config_gen.sh',
+  creates => '/vagrant/user.kubeconfig',
+  require => File['/vagrant/config_gen.sh']
 }
 
 # F Calico
