@@ -26,7 +26,7 @@ END
 
 $user_kubeconfig = @(END)
 CLUSTER_SERVER=$(/usr/bin/kubectl config view --kubeconfig=/vagrant/kubeconfig -o jsonpath='{.clusters[0].cluster.server}')
-/usr/bin/kubectl config set-cluster kubernetes --server=$CLUSTER_SERVER --certificate-authority=/etc/kubernetes/pki/ca.crt --embed-certs=true --kubeconfig=user.kubeconfig
+/usr/bin/kubectl config set-cluster kubernetes --server=$CLUSTER_SERVER --certificate-authority=/etc/kubernetes/pki/ca.crt --kubeconfig=user.kubeconfig --embed-certs=true
 END
 
 Exec { path => '/bin/:/sbin/:/usr/bin/:/usr/sbin/' }
