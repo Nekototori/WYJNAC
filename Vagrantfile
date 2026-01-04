@@ -7,7 +7,7 @@ Vagrant.configure("2") do |config|
   # Control plane
   config.vm.define "k8s-controlplane" do |controlplane|
     controlplane.vm.hostname = "k8s-controlplane"
-    controlplane.vm.network "private_network", ip: "192.168.69.10"
+    controlplane.vm.network "private_network", ip: "192.168.67.10"
     controlplane.vm.provider "virtualbox" do |vb|
       vb.memory = 4096
       vb.cpus = 4
@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
   (1..2).each do |i| # Can add more here for scale. yay.
     config.vm.define "k8s-worker#{i}" do |worker|
       worker.vm.hostname = "k8s-worker#{i}"
-      worker.vm.network "private_network", ip: "192.168.69.1#{i+0}"
+      worker.vm.network "private_network", ip: "192.168.67.1#{i+0}"
       worker.vm.provider "virtualbox" do |vb|
         vb.memory = 4096
         vb.cpus = 4

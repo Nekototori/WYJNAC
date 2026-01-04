@@ -19,7 +19,7 @@ vagrant (and the puppet plugin, and racc plugin if you're on Windows)
 Virtualbox
 Cognac (optional)
 kubernetes CLI on your jumpbox (the machine you're running these commands, usually!)
-
+helm on your jump box as well (Or you can do these manually)
 
 # How to use
 
@@ -63,7 +63,29 @@ $env:KUBECONFIG="C:\path\to\this\project\kubeconfig"
 
 Or your *nix shell of choice.
 
-The initial setup exposes the admin kubeconfig for debugging purposes. Next task is to setup a user, and grant said user access to deploy apps in their own namespace.  There we'll deploy the nginx.
+The initial setup exposes the admin kubeconfig for playing the admin role for the following steps.
+It also generates the certificates on the worker nodes.  In case you want to play around with a 2nd user.
+
+################################################
+The following steps are manual due to jumping between something I'd put in an automated workflow and user actions
+the automated workflow skipped mostly because I couldn't decide how I wanted to approach it.
+################################################
+
+Next we need helm chart to create the namespace that our users/developers will be allowed to deploy apps to.
+
+```bash
+helm install userspace ./charts/userspace --namespace userspace --create-namespace
+  ```
+
+This sets up the namespace, the role needed, and now our mock user Bob (that's you!) can submit their certificate for approval by the admin (that's also you!)
+
+Modify the `user_cert.yaml` file to include the cert file.  Example below:
+
+```yaml
+
+
+
+Next task is to setup a user, and grant said user access to deploy apps in their own namespace.  There we'll deploy the nginx.
 
 
 

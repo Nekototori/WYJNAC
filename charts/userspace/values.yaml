@@ -1,7 +1,7 @@
 # Parameters to customize later. Maybe more apps?
 # Maybe more users? Maybe you just hate Bob.
 
-namespace: nginx-app
+namespace: userspace
 
 users:
   - name: bob

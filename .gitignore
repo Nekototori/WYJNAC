@@ -23,6 +23,8 @@ override.tf.json
 terraform.rc
 
 
+
+
 # Vagrant stuff
 
 .vagrant/
@@ -30,11 +32,16 @@ terraform.rc
 
 
 # Module specific files that get created due to vagrant's shared directory.
+# These shouldn't be commited and are expected to be unique per user/cluster anyway.
 
 join_command.sh
 kubeconfig
 kubeconfig_admin
 kubeconfig_user
+k8s-worker1some_user.csr
+k8s-worker2some_user.csr
+config_gen.sh
+user_cert.yaml
 
 
 # Part of the opentofu deadend, didn't feel like deleting in case I had bonus time...
