@@ -1,6 +1,8 @@
-openssl genrsa -out $(hostname)some_user.key 2048
+openssl genrsa -out /vagrant/$(hostname)some_user.key 2048
 
 openssl req -new \
-  -key $(hostname)some_user.key \
+  -key /vagrant/$(hostname)some_user.key \
   -out /vagrant/$(hostname)some_user.csr \
-  -subj "/CN=some_user/O=nginx-app"
+  -subj "/CN=bob/O=userspace"
+
+cat /vagrant/$(hostname)some_user.csr | base64 | tr -d '\n' > /vagrant/$(hostname)base64.txt

@@ -1,7 +1,7 @@
 apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
-  name: developer
+  name: bob
 spec:
   request: # Put your base64 encoded certificate here.
   signerName: kubernetes.io/kube-apiserver-client

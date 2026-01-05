@@ -9,10 +9,10 @@ $kubeadm_config = @(END)
 kind: ClusterConfiguration
 apiVersion: kubeadm.k8s.io/v1beta3
 kubernetesVersion: v1.35.0
-controlPlaneEndpoint: "192.168.69.10:6443"
+controlPlaneEndpoint: "192.168.67.10:6443"
 networking:
   serviceSubnet: "10.96.0.0/12"
-  podSubnet: "192.168.0.0/16"
+  podSubnet: "10.10.0.0/16"
   dnsDomain: "cluster.local"
 controllerManager:
   extraArgs:

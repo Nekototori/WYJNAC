@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: nginx
+  tag: stable
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: ""
+  hosts:
+    - host: hello.nginx.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: hello-nginx-tls
+      hosts:
+        - hello.nginx.local

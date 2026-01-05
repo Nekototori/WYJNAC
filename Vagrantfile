@@ -43,7 +43,8 @@ Vagrant.configure("2") do |config|
       end
  
     worker.vm.provision "shell", inline: "wget https://apt.puppetlabs.com/puppet8-release-jammy.deb"
-    
+    worker.vm.provision "shell", inline: "apt install net-tools"
+    worker.vm.provision "shell", inline: "route add 10.10.0.1 gw 192.168.67.10"
     worker.vm.provision "shell", inline: "sudo dpkg -i puppet8-release-jammy.deb"
     worker.vm.provision "shell", path: "vagrant_scripts/container_setup.sh"
     worker.vm.provision "shell", path: "vagrant_scripts/user_certgen.sh"

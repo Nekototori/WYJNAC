@@ -1,0 +1,1 @@
+cat /vagrant/base64.crt | base64 --decode > /vagrant/developer.crt

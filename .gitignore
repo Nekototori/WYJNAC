@@ -42,6 +42,9 @@ k8s-worker1some_user.csr
 k8s-worker2some_user.csr
 config_gen.sh
 user_cert.yaml
+*.txt
+*.key
+*.crt
 
 
 # Part of the opentofu deadend, didn't feel like deleting in case I had bonus time...
